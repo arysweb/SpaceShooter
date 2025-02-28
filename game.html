@@ -126,6 +126,14 @@
                 <p>+50 COINS</p>
             </div>
         </div>
+        
+        <!-- Dialogue Overlay -->
+        <div id="dialogue-overlay">
+            <div id="dialogue-container">
+                <div id="dialogue-text"></div>
+                <button id="dialogue-continue" class="hidden">Continue</button>
+            </div>
+        </div>
     </div>
     
     <script>
@@ -159,6 +167,17 @@
             }, 0);
         });
     </script>
+    <script>
+        const onboardDialogues = [
+            "AI: Good. You're aboard in one piece.",
+            "Commander: What the hell just happened?",
+            "AI: Emergency protocol. You were teleported.",
+            "Commander: A little warning would've been nice.",
+            "AI: No time. The Blaster's sensors show incoming hostiles.",
+            "Commander: How long?",
+            "AI: Too late. They're here! Hold them off while I bring systems online!"
+        ];
+    </script>
     <script src="js/config.js"></script>
     <script src="js/mystery_box.js"></script>
     <script src="js/bg_elements.js"></script>
@@ -171,5 +190,6 @@
     <script src="js/gameUI.js"></script>
     <script src="js/player_stats.js"></script>
     <script src="js/game.js"></script>
+    <script src="js/dialogue.js"></script>
 </body>
 </html>

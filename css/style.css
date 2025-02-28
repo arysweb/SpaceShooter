@@ -638,3 +638,42 @@ body.fade-in #info-bar {
     pointer-events: none;
     transition: opacity 2s ease-in-out;
 }
+
+/* Dialogue Overlay Styles */
+#dialogue-overlay {
+    position: fixed;
+    bottom: 20px;
+    left: 20px;
+    width: 600px;
+    background-color: rgba(0, 0, 0, 0.8);
+    border: 2px solid white;
+    border-radius: 0;
+    padding: 15px;
+    display: block !important;
+    z-index: 1000;
+    font-family: 'Press Start 2P', cursive;
+    color: white;
+    line-height: 1.6;
+    font-size: 12px;
+    opacity: 1;
+    visibility: visible;
+}
+
+#dialogue-overlay.active {
+    display: block !important;
+}
+
+#dialogue-text {
+    margin-bottom: 15px;
+}
+
+#dialogue-continue {
+    background-color: white;
+    color: black;
+    border: none;
+    padding: 10px;
+    font-family: 'Press Start 2P', cursive;
+    cursor: pointer;
+    font-size: 12px;
+}
+
