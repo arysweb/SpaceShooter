@@ -306,6 +306,11 @@ class AlienManager {
     }
     
     startAlienSpawner() {
+        // Prevent spawning if not allowed
+        if (!window.gameState || !window.gameState.canSpawn) {
+            return;
+        }
+
         // Clear any existing timeout to prevent multiple spawners
         if (this.alienSpawnerTimeout) {
             clearTimeout(this.alienSpawnerTimeout);

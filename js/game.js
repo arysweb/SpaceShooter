@@ -618,6 +618,12 @@ class Game {
     }
     
     gameLoop() {
+        // Check if game is paused globally
+        if (window.gamePaused) {
+            requestAnimationFrame(this.gameLoop.bind(this));
+            return;
+        }
+
         // Clear the canvas
         this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
         

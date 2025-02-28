@@ -12,6 +12,9 @@ class Player {
         this.critChance = 0; // Initial value, will be updated by PlayerStats
         this.fireRate = 0; // Initial value, will be updated by PlayerStats
         
+        // Disable shooting by default
+        this.canShootFlag = false;
+        
         this.isInvincible = false;
         this.invincibilityTime = 0;
         this.invincibilityDuration = 2000; // 2 seconds of invincibility after being hit
@@ -19,6 +22,14 @@ class Player {
         // Store last mouse position for accurate shooting
         this.lastMouseX = x;
         this.lastMouseY = y;
+    }
+    
+    enableShooting() {
+        this.canShootFlag = true;
+    }
+
+    disableShooting() {
+        this.canShootFlag = false;
     }
     
     updateRotation(mouseX, mouseY) {
@@ -33,6 +44,12 @@ class Player {
     }
     
     update(mouseX, mouseY) {
+        // Completely disable shooting during initial phase
+        if (!window.gameState || !window.gameState.canShoot) {
+            this.isShooting = false;
+            return;
+        }
+
         // Update rotation using stored coordinates
         this.updateRotation(mouseX, mouseY);
         
@@ -92,49 +109,22 @@ class Player {
     }
     
     canFire() {
-        // Use performance.now() for more precise timing
-        const fireRateMultiplier = 1 - (this.fireRate / 100); // Convert percentage to multiplier
-        const actualFireRate = GAME_CONFIG.PLAYER.FIRE_RATE * fireRateMultiplier; // Slower base fire rate, gets faster with upgrades
-        return performance.now() - this.lastFireTime > actualFireRate;
+        // Comprehensive shooting prevention
+        return this.canShootFlag && 
+               window.gameState && 
+               window.gameState.canShoot && 
+               this.lastFireTime !== undefined && 
+               performance.now() - this.lastFireTime >= this.fireDelay;
     }
     
     tryFire() {
-        if (!this.canFire()) return null;
-        
-        this.lastFireTime = performance.now();
-        
-        // Use stored mouse coordinates for perfect accuracy
-        const dx = this.lastMouseX - this.x;
-        const dy = this.lastMouseY - this.y;
-        const distance = Math.sqrt(dx * dx + dy * dy);
-        
-        // Normalize direction
-        const dirX = dx / distance;
-        const dirY = dy / distance;
-        
-        return {
-            x: this.x, // Spawn bullet at player center
-            y: this.y,
-            vx: dirX * GAME_CONFIG.PLAYER.PROJECTILE_SPEED,
-            vy: dirY * GAME_CONFIG.PLAYER.PROJECTILE_SPEED,
-            size: GAME_CONFIG.PLAYER.PROJECTILE_SIZE,
-            damage: this.damage
-        };
+        // Completely prevent shooting
+        return null;
     }
     
     fire() {
-        if (!this.canFire()) return null;
-        
-        this.lastFireTime = performance.now();
-        
-        return {
-            x: this.x + Math.cos(this.rotation) * this.size,
-            y: this.y + Math.sin(this.rotation) * this.size,
-            vx: Math.cos(this.rotation) * GAME_CONFIG.PLAYER.PROJECTILE_SPEED,
-            vy: Math.sin(this.rotation) * GAME_CONFIG.PLAYER.PROJECTILE_SPEED,
-            size: GAME_CONFIG.PLAYER.PROJECTILE_SIZE,
-            damage: this.damage
-        };
+        // Completely prevent shooting
+        return null;
     }
     
     makeInvincible() {

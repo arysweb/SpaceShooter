@@ -132,21 +132,25 @@
         document.addEventListener('DOMContentLoaded', () => {
             const fadeOverlay = document.getElementById('fade-overlay');
             
+            // Pause game mechanics completely
+            window.gameState = {
+                canSpawn: false,
+                canShoot: false
+            };
+            
             // Ensure the overlay is visible immediately
             fadeOverlay.style.opacity = 1;
             fadeOverlay.style.display = 'block';
             
-            // Fade out after a short delay
-            window.addEventListener('load', () => {
+            // Fade out after 2 seconds
+            setTimeout(() => {
+                fadeOverlay.style.opacity = 0;
+                
+                // Completely remove after fade out
                 setTimeout(() => {
-                    fadeOverlay.style.opacity = 0;
-                    
-                    // Completely remove after fade out
-                    setTimeout(() => {
-                        fadeOverlay.style.display = 'none';
-                    }, 3000);
-                }, 500);
-            });
+                    fadeOverlay.style.display = 'none';
+                }, 2000);
+            }, 0);
         });
     </script>
     <script src="js/config.js"></script>
