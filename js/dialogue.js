@@ -1,3 +1,14 @@
+// Dialogue content
+const onboardDialogues = [
+    "AI: Good. You're aboard in one piece.",
+    "Commander: What the hell just happened?",
+    "AI: Emergency protocol. You were teleported.",
+    "Commander: A little warning would've been nice.",
+    "AI: No time. The Blaster's sensors show incoming hostiles.",
+    "Commander: How long?",
+    "AI: Too late. They're here! Hold them off while I bring systems online!"
+];
+
 class DialogueSystem {
     constructor(dialogues) {
         console.log('Dialogue System Initialized', dialogues);
