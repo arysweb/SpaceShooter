@@ -132,6 +132,9 @@
         document.addEventListener('DOMContentLoaded', () => {
             const fadeOverlay = document.getElementById('fade-overlay');
             
+            // Add fade-in class to body
+            document.body.classList.add('fade-in');
+            
             // Pause game mechanics completely
             window.gameState = {
                 canSpawn: false,
@@ -145,6 +148,9 @@
             // Fade out after 2 seconds
             setTimeout(() => {
                 fadeOverlay.style.opacity = 0;
+                
+                // Remove fade-in class
+                document.body.classList.remove('fade-in');
                 
                 // Completely remove after fade out
                 setTimeout(() => {

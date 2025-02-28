@@ -37,6 +37,12 @@ body {
     padding: 0 40px;
     font-size: 12px;
     z-index: 2;
+    opacity: 0;
+    transition: opacity 2s ease-in-out;
+}
+
+body.fade-in #info-bar {
+    opacity: 0;
 }
 
 .column {
